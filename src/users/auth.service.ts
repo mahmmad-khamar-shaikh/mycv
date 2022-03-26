@@ -13,8 +13,14 @@ export class AuthService {
     constructor(private userService: UsersService) { }
 
     async signUp(email: string, password: string) {
+        console.log('SignUp Service called');
 
         const users = await this.userService.find(email);
+
+
+        console.log('Got User', users);
+
+
         if (users.length) {
             throw new BadRequestException('User exists');
         }
@@ -24,6 +30,7 @@ export class AuthService {
         const hash = (await scrypt(password, salt, 32)) as Buffer;
 
         const result = salt + '.' + hash.toString('hex');
+        console.log('user Created');
 
         const user = await this.userService.create(email, result);
         return user;

@@ -70,6 +70,7 @@ export class UsersController {
 
     @Post('/signup')
     async createUser(@Body() body: CreateUserDto, @Session() session: any) {
+        console.log('Signup method Caaled.')
         const user = await this.authService.signUp(body.email, body.password);
         session.userId = user.id
         return user;

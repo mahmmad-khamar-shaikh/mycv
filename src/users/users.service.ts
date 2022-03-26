@@ -28,6 +28,7 @@ export class UsersService {
     }
 
     public async find(email: string) {
+        console.log('user.service.ts find method called');
         return await this.repo.find({ email });
     }
 
